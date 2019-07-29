@@ -1,0 +1,83 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="course/faculty/layout">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Applicant List</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tbody>
+                
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+</div>
+
+<div layout:fragment="content-js-script">
+
+
+<script>
+
+	function initTable () {
+	  return $('.table').dataTable();
+	}
+	 
+	function tableActions () {
+	  //var table = initTable();
+	 
+	  // perform API operations with `table`
+	  // ...
+	  
+	  
+
+		$('.table').DataTable( {
+	        //data: dataSet,
+	        "ajax": {
+	            "url": "/faculty/get-recordsheet-list",
+	            "data": function ( data ) {
+		            	console.log(data);
+		 				//process data before sent to server.
+		         }},
+	        "columns": [
+
+	            { title: "SR.No.", data: 'faculty_workflow_id'  },
+	            { title: "Date", data: 'date'  },
+	            { title: "Batch Name", data: 'batch_to_modules_id' },
+	            { title: "Hours", data: 'hours'},
+	            { title: "Task Description date", data: 'task_description' }
+	            
+	        ],
+	    } );
+
+
+		  
+		  
+	}
+
+	tableActions();
+	
+
+
+</script>
+
+
+</div>
+
+
+</body>
+</html>
