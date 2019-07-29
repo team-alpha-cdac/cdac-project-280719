@@ -1,6 +1,7 @@
 package com.cdac.project.faculty.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,9 @@ public class FacultyRouteController {
 	private ApplicantService applicantService;
 	
     @RequestMapping("/")
-    public String indexApplicant() {
+    public String indexApplicant(Model model) {
+    	//final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+    	//model.addAttribute("username", currentUserName);
         return "faculty/applicant/dashboard/index";
     }
     

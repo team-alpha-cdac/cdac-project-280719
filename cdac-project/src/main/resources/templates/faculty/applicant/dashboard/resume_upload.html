@@ -27,7 +27,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form method="POST" action="#" th:action="@{/uploadFile}" enctype="multipart/form-data">
+		<form method="POST" action="#" th:action="@{/uploadResume/}+${session.username}" enctype="multipart/form-data">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="inputFile">File input</label> <input type="file" id="uploadile" name="uploadfile"></input>

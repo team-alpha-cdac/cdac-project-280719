@@ -8,7 +8,41 @@
 
 
 <div layout:fragment="content">
-    Welcome to CDAC 
+    
+    <div class="row">
+    	<div class="col-md-12">
+    	<div class="callout callout-info">
+                <h4>Welcome <span th:text="${session.username}"></span></h4>
+                <p>Follow the steps to apply for the job.</p>
+              </div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Application Filling</span>
+              <span class="info-box-number">Pending</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Resume Upload</span>
+              <span class="info-box-number">Pending</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+    </div>
 </div>
 
 

@@ -1,0 +1,57 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+    
+        
+        <li class="active treeview menu-open" style="height: auto;">
+          <a href="#">
+            <i class="fa fa-cubes"></i> <span>Batch</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          
+          <ul class="treeview-menu" style="">
+            <li><a href="/cadmin/batchCreation"><i class="fa fa-circle-o"></i> Add Batch</a></li>
+            <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> List Batch</a></li>
+            <li class="active"><a href="/addFaculty"><i class="fa fa-circle-o"></i> Assign Faculty</a></li>
+          </ul>
+          
+          
+          
+        </li>
+        
+        
+        
+        
+        <li class="active treeview menu-open" style="height: auto;">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Faculty</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          
+          <ul class="treeview-menu" style="">
+            <li><a href="/cadmin/addFaculty"><i class="fa fa-circle-o"></i> Add Faculty</a></li>
+            <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> List Faculty</a></li>
+          </ul>
+          
+          
+          
+        </li>
+        
+        
+        
+        <li class="treeview">
+            <a href="/logout">
+                <i class="fa fa-signout"></i> <span>Logout</span>
+            </a>
+        </li>
+  
+        
+        
+    </ul>
+</section>
+<!-- /.sidebar -->

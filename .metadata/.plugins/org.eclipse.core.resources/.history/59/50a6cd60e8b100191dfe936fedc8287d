@@ -1,0 +1,46 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+    
+        <li class="active treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+        </li>
+
+	<li class="treeview">
+            <a href="#">
+                <i class="fa fa-book"></i>
+                <span>Record Sheet</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+                <li><a href="/faculty/recordsheet"><i class="fa fa-circle-o"></i>Add Record Sheet Update</a></li>
+                 <li><a href="/faculty/show-recordsheet"><i class="fa fa-circle-o"></i>List Record Sheet</a></li>
+            </ul>
+        </li>
+        
+        
+         <li class="treeview">
+            <a href="/faculty/upload">
+                <i class="fa fa-upload"></i> <span>Upload Docs</span>
+            </a>
+        </li>
+        
+         
+        
+        <li class="treeview">
+            <a href="/logout">
+                <i class="fa fa-dashboard"></i> <span>Logout</span>
+            </a>
+        </li>
+        
+        
+     
+  
+        
+        
+    </ul>
+</section>
+<!-- /.sidebar -->

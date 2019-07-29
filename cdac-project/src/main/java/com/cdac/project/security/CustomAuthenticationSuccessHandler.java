@@ -6,10 +6,12 @@ import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
@@ -22,6 +24,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
+		String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+		HttpSession session=request.getSession();
+		session.setAttribute("username", currentUserName);
         if (roles.contains("APPLICANT")) {
         	response.sendRedirect("/");
         } 

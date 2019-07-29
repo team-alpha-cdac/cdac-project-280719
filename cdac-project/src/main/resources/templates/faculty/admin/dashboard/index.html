@@ -11,22 +11,20 @@
 	<div layout:fragment="content">
 		<b>CDAC Dashboard</b>
 		<div class="row">
-			<!-- <div class="col-md-3 col col-sm-6 col-xs-12">
-				<div class="info-box">
-					<span class="info-box-icon bg-yellow"><i
-						class="ion ion-ios-people-outline"></i></span>
-					<div class="info-box-content">
-						<span class="info-box-text">Applicants</span> <span
-							class="info-box-number" th:text="${applicantCount}"></span>
-					</div>
-					/.info-box-content
+			<div class="col-md-12">
+				<div class="callout callout-info">
+					<h4>
+						Welcome <span th:text="${session.username}"></span>
+					</h4>
+					<p>Faculty Admin Panel</p>
 				</div>
-			</div> -->
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-3 col col-sm-6 col-xs-12">
 				<div class="small-box bg-yellow">
 					<div class="inner">
 						<h3 th:text="${applicantCount}"></h3>
-
 						<p>Applications</p>
 					</div>
 					<div class="icon">

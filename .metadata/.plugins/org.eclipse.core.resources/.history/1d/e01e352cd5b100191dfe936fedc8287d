@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="faculty/admin/layout">
+<head>
+<title>Dashboard</title>
+</head>
+<body>
+
+
+
+	<div layout:fragment="content">
+		<b>CDAC Dashboard</b>
+		<div class="row">
+    	<div class="col-md-12">
+    	<div class="callout callout-info">
+                <h4>Welcome <span th:text="${session.username}"></span></h4>
+                <p>Follow the steps to apply for the job.</p>
+              </div>
+    	</div>
+    </div>
+		<div class="row">
+			<div class="col-md-3 col col-sm-6 col-xs-12">
+				<div class="small-box bg-yellow">
+					<div class="inner">
+						<h3 th:text="${applicantCount}"></h3>
+						<p>Applications</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<a href="/fadmin/listApplicant" class="small-box-footer"> More
+						info <i class="fa fa-arrow-circle-right"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

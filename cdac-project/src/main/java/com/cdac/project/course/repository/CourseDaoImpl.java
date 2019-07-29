@@ -22,6 +22,7 @@ public class CourseDaoImpl implements CourseDao{
 	public List<Courses> getCourses() {
 		this.sessionFactory = this.entityManager.unwrap(Session.class).getSessionFactory();
 		Session session = this.sessionFactory.openSession();
+		@SuppressWarnings("unchecked")
 		List<Courses> courses = (List<Courses>) session.createQuery("from Courses").list();
 		
 		return courses;

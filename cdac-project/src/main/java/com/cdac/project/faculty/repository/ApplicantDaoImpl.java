@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 import org.springframework.stereotype.Repository;
 
 import com.cdac.project.faculty.model.Applicant;
@@ -32,6 +31,7 @@ public class ApplicantDaoImpl implements ApplicantDao{
 		return applicant;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Applicant> listApplicants() {
