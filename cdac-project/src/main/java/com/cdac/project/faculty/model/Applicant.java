@@ -7,7 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -20,17 +25,32 @@ public class Applicant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer applicant_id;
 	
+    private String username;
+   
+	@Email(message="Email should be valid")
+    @NotBlank(message="Email cannot be empty")
 	private String email;
+    @NotBlank(message="Mobile No. cannot be empty")
 	private String mobile;
-	private String password;
+//	private String password;
 	@DateTimeFormat(iso=ISO.DATE)
+	@Past(message="DOB has to be valid")
+	//@NotBlank(message="Enter DOB")
 	private Date dob;
+	
+	@NotBlank(message = "Name cannot be empty")
+    @Size(min=2, max=30,message="Name should have 2-30 characters")
 	private String name;
+	
+	@NotBlank(message="Please select a gender")
 	private String gender;
 	private String experience;
+	@NotBlank(message="Qualification cannot be empty")
 	private String qualifications;
 	private String subject_interested;
+	@NotBlank(message="Select Marital Status")
 	private String marital_status;
+	@NotBlank(message="Languages known cannot be empty")
 	private String languages_known;
 	private String linkedin_link;
 	private Integer document_id;
@@ -47,7 +67,7 @@ public class Applicant {
 		super();
 		this.email = email;
 		this.mobile = mobile;
-		this.password = password;
+	//	this.password = password;
 	}
 
 	public String getEmail(){
@@ -66,13 +86,21 @@ public class Applicant {
 		this.mobile=mobile;
 	}
 
-	public String getPassword(){
-		return password;
+	 
+    public String getUsername() {
+		return username;
 	}
 
-	public void setPassword(String password){
-		this.password=password;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
+
+	/*
+	 * public String getPassword(){ return password; }
+	 * 
+	 * public void setPassword(String password){ this.password=password; }
+	 */
 
 	public java.util.Date getDob(){
 		return dob;

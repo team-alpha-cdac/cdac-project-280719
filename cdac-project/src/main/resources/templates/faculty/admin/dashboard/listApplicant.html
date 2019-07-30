@@ -135,10 +135,17 @@
 				data: 'subject_interested'
 			},
 			{
-				title: "DOB",
-				data: 'dob'
+				title:"",
+				data: 'username',
+				render: function(data,type,row,meta){
+					if(type=='display'){
+						data='<a href="/api/downloadResume/'+data+'"><button type="button" class="btn btn-block btn-primary btn-xs">Download Resume</button></a>';
+					}
+					return data;
+				}
 			}
 			],
+			
 		});
 
 	}

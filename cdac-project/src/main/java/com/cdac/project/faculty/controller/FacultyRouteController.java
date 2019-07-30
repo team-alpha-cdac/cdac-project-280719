@@ -74,6 +74,14 @@ public class FacultyRouteController {
         return "faculty/admin/dashboard/ShortlistForInterview";
     }
     
+    @RequestMapping("/fadmin/mailing")
+    public String mailing(Model model) {
+    	model.addAttribute("reciever",new String());
+    	model.addAttribute("subject",new String());
+    	model.addAttribute("message",new String());
+    	return "faculty/admin/dashboard/mailing";
+    }
+    
 
     
 

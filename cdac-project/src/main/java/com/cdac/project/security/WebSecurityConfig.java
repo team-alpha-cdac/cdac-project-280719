@@ -78,7 +78,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             User userDetails = new User("anuj", encoder.encode("1234"), authorities);
             userDetailsService.createUser(userDetails);
         }
-        
+        if (!userDetailsService.userExists("surajsbmn")) {
+            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+            
+            authorities.add(new SimpleGrantedAuthority("APPLICANT"));
+            User userDetails = new User("surajsbmn", encoder.encode("1234"), authorities);
+            userDetailsService.createUser(userDetails);
+        }
+        if (!userDetailsService.userExists("akileshy")) {
+            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+            
+            authorities.add(new SimpleGrantedAuthority("APPLICANT"));
+            User userDetails = new User("akileshy", encoder.encode("1234"), authorities);
+            userDetailsService.createUser(userDetails);
+        }
+        if (!userDetailsService.userExists("surajs")) {
+            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+            
+            authorities.add(new SimpleGrantedAuthority("APPLICANT"));
+            User userDetails = new User("surajs", encoder.encode("1234"), authorities);
+            userDetailsService.createUser(userDetails);
+        }
+        if (!userDetailsService.userExists("sonalis")) {
+            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+            
+            authorities.add(new SimpleGrantedAuthority("APPLICANT"));
+            User userDetails = new User("sonalis", encoder.encode("1234"), authorities);
+            userDetailsService.createUser(userDetails);
+        }
         if (!userDetailsService.userExists("atul")) {
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
             

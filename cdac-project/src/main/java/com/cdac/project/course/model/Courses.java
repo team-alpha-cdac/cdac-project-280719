@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name="db_courses")
 public class Courses {
@@ -13,6 +15,7 @@ public class Courses {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int course_id;
+	@NotBlank(message="Select a Course")
 	private String course_name;
 	private int status;
 	

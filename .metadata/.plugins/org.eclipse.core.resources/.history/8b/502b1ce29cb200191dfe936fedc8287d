@@ -1,0 +1,104 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="course/admin/layout">
+	<head>
+		<title>Batch Creation</title>
+	</head>
+	<body>
+		<div class="col-md-6">
+			<div layout:fragment="content">
+				<div class="login-box">
+					<div class="login-logo">
+						<b>Batch Creation</b>
+					</div>
+					<form th:action="@{/SubmitAddBatch}" th:object="${batches}" method="post" enctype="multipart/form-data" id="form">
+						<div>
+							<div class="col-md-6">
+								
+								<div class="form-group">
+									<label>Course id</label>
+									<select class="course-dd form-control" th:field="*{course_id}">
+											 <option value="0"></option>
+									</select>
+									<div th:if="${#fields.hasErrors('course_id')}" th:errors="*{course_id}" class="callout callout-danger"></div>		
+								</div>
+								
+								<label>Batch Name</label>
+								<input type="text" class="form-control" placeholder="Batch Name" th:field="*{batch_name}" />
+								
+								<label>Batch Start Date</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="date" class="form-control" name="batch_start_date" placeholder="batch start date" th:field="*{batch_start_date}"/>
+								</div>
+								
+
+								
+								<div class="form-group">
+						        
+									<label>Batch End Date</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										<input type="date" class="form-control" name="batch_end_date" placeholder="batch end date" th:field="*{batch_end_date}"/>
+									</div>
+						            
+						        </div>    
+								
+								
+								<div class="row">
+									<div class="col-md-8">
+										<button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+									</div>
+								</div>
+							
+							</div>
+						</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<div layout:fragment="content-script">
+
+		<script type="text/javascript">  
+	        $(document).ready(function () {  
+	            
+	        	$.ajax({  
+	                type: "GET", 
+	                url: "/get-courses", 
+	                dataType: "json", 
+	                contentType: "application/json", 
+	                success: function (res)  
+	                {  
+	                	var options="<option value="+0+">Select Course</option>";
+	                	
+	                    $.each(res, function (data, value) {  
+	  						
+	                        console.log(value.course_id);
+	                    	console.log(value.course_name);
+	                    	
+	                    	options=options+`<option value="${value.course_id}">${value.course_name}</option>`;
+	                    });
+	                    
+	                    console.log(options);
+	                    $(".course-dd").html("");
+	                    $(".course-dd").html(options)
+	                }  
+	  
+	            });  
+	  
+	        });
+	          
+	    </script>  	
+		
+	</div>
+
+</body>
+</html>

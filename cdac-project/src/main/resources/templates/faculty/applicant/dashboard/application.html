@@ -16,6 +16,7 @@
 				<p>Application Submitted successfully.</p>
 			</div>
 		</div>
+		
 		<div class="login-box">
 
 			<div class="login-box-body">
@@ -25,24 +26,37 @@
 				</div>
 
 				<form action="#" th:action="@{/submitApplication}"
-					th:object="${applicant}" method="post" enctype="multipart/form-data" id="form">
+					th:object="${applicant}" method="post" id="form">
 					<!-- <input type="hidden" th:field="*{applicant_id}" /> -->
+					
 					<div class="form-group has-feedback">
 						<input type="text" class="form-control" name="name"
 							placeholder="Name" th:field="*{name}" />
+						<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="callout callout-danger"></div>
 					</div>
+					 
+					
 					<div class="form-group has-feedback">
 						<input type="email" class="form-control" name="email"
 							placeholder="Email" th:field="*{email}" />
-
+						<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="callout callout-danger"></div>
+						
 					</div>
+					
+					
 					<div class="form-group has-feedback">
 						<input type="text" class="form-control" name="mobile no"
 							placeholder="Mobile no" th:field="*{mobile}" />
+						<div th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}" class="callout callout-danger"></div>
+							
 					</div>
+					
+					
 					<div class="form-group has-feedback">
 						<input type="date" class="form-control" name="dob"
 							placeholder="Date of Birth" th:field="*{dob}" />
+						<div th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="callout callout-danger"></div>
+
 					</div>
 					<div>
 						<span> Gender : &nbsp; <input type="radio" name="gender"
@@ -50,19 +64,24 @@
 							type="radio" name="gender" value="Female" th:field="*{gender}" />
 							Female
 						</span>
+						<div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="callout callout-danger"></div>
+						
 					</div>
 
 					<div>
-						<span> Status : &nbsp; &nbsp; <input type="radio"
+						<span>Marital Status : &nbsp; &nbsp; <input type="radio"
 							name="maritalstatus" value="Married" th:field="*{marital_status}" />
 							Married &nbsp; &nbsp; <input type="radio" name="maritalstatus"
 							value="Single" th:field="*{marital_status}" /> Single
 						</span>
+						<div th:if="${#fields.hasErrors('marital_status')}" th:errors="*{marital_status}" class="callout callout-danger"></div>
+						
 					</div>
 					<p></p>
 					<div class="form-group has-feedback">
 						<input type="text" class="form-control" name="qualifications"
 							placeholder="Qualification" th:field="*{qualifications}" />
+						<div th:if="${#fields.hasErrors('qualifications')}" th:errors="*{qualifications}" class="callout callout-danger"></div>
 					</div>
 
 
@@ -80,6 +99,7 @@
 							<option value="asdm">ASDM</option>
 							<option value="ms.net">MS.NET</option>
 						</select>
+						<div th:if="${#fields.hasErrors('subject_interested')}" th:errors="*{subject_interested}" class="callout callout-danger"></div>
 
 					</div>
 
@@ -87,13 +107,12 @@
 					<div class="form-group has-feedback">
 						<input type="text" class="form-control" name="language"
 							placeholder="Languages known" th:field="*{languages_known}" />
-
+						<div th:if="${#fields.hasErrors('languages_known')}" th:errors="*{languages_known}" class="callout callout-danger"></div>
 					</div>
 
 					<div class="form-group has-feedback">
 						<input type="text" class="form-control" name="likedin"
 							placeholder="Likedin Link" th:field="*{linkedin_link}" />
-
 					</div>
 
 					<!-- <div class="form-group has-feedback">

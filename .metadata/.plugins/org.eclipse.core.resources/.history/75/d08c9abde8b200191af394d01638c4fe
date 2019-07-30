@@ -1,0 +1,597 @@
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
+--
+-- Host: localhost    Database: cdac_db_project3
+-- ------------------------------------------------------
+-- Server version	5.7.26-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `authorities`
+--
+
+DROP TABLE IF EXISTS `authorities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authorities` (
+  `username` varchar(50) NOT NULL,
+  `authority` varchar(50) NOT NULL,
+  UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
+  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `authorities`
+--
+
+LOCK TABLES `authorities` WRITE;
+/*!40000 ALTER TABLE `authorities` DISABLE KEYS */;
+INSERT INTO `authorities` VALUES ('admin','ACTUATOR'),('anuj','APPLICANT'),('atul','FACULTY_ADMIN'),('madhuri','COURSE_ADMIN'),('sathish','FACULTY');
+/*!40000 ALTER TABLE `authorities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_applicant`
+--
+
+DROP TABLE IF EXISTS `db_applicant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_applicant` (
+  `applicant_id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) DEFAULT NULL,
+  `mobile` varchar(50) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `gender` varchar(50) DEFAULT NULL,
+  `experience` varchar(50) DEFAULT NULL,
+  `qualifications` varchar(50) DEFAULT NULL,
+  `subject_interested` varchar(50) DEFAULT NULL,
+  `marital_status` varchar(50) DEFAULT NULL,
+  `languages_known` varchar(50) DEFAULT NULL,
+  `linkedin_link` varchar(50) DEFAULT NULL,
+  `document_id` int(11) DEFAULT '0',
+  `created_timestamp` timestamp NULL DEFAULT NULL,
+  `updated_timestamp` timestamp NULL DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`applicant_id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_applicant`
+--
+
+LOCK TABLES `db_applicant` WRITE;
+/*!40000 ALTER TABLE `db_applicant` DISABLE KEYS */;
+INSERT INTO `db_applicant` VALUES (100,'sonali@gmail.com','9874561230',NULL,'Sonali S','Female',NULL,'MSc','OS','Single','English','',0,NULL,NULL,NULL,'sonalis'),(110,'suraj@gmail.com','878745455',NULL,'Suraj S','Male',NULL,'BE','C++','Single','English',NULL,0,NULL,NULL,NULL,'surajs'),(115,'akilesh@gmail.com','787898985',NULL,'Akilesh Y','Male',NULL,'BE','Data Structures','Single','English',NULL,0,NULL,NULL,NULL,'akileshy'),(117,'sarvesh@gmail.com','7798688748','2019-07-03','Sarvesh','Male',NULL,'sdgasg','java','Single','fadasa','asdaf',NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `db_applicant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_applicant_action`
+--
+
+DROP TABLE IF EXISTS `db_applicant_action`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_applicant_action` (
+  `applicant_action_id` int(11) NOT NULL AUTO_INCREMENT,
+  `applicant_id` int(11) DEFAULT NULL,
+  `application_status` varchar(50) DEFAULT NULL,
+  `applicant_remarks` varchar(50) DEFAULT NULL,
+  `created_timestamp` timestamp NULL DEFAULT NULL,
+  `updated_timestamp` timestamp NULL DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`applicant_action_id`),
+  KEY `fk` (`applicant_id`),
+  CONSTRAINT `fk` FOREIGN KEY (`applicant_id`) REFERENCES `db_applicant` (`applicant_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_applicant_action`
+--
+
+LOCK TABLES `db_applicant_action` WRITE;
+/*!40000 ALTER TABLE `db_applicant_action` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_applicant_action` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_applicant_interview`
+--
+
+DROP TABLE IF EXISTS `db_applicant_interview`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_applicant_interview` (
+  `applicant_interview_id` int(11) NOT NULL AUTO_INCREMENT,
+  `applicant_id` int(11) NOT NULL DEFAULT '0',
+  `applicant_stage` int(11) NOT NULL DEFAULT '0',
+  `interview_schedule_date` date NOT NULL,
+  `interview_schedule_time` time NOT NULL,
+  `interview_schedule_notes` varchar(50) NOT NULL DEFAULT '0',
+  `interview_assigned_to` varchar(50) NOT NULL DEFAULT '0',
+  `interview_status` int(11) NOT NULL DEFAULT '0',
+  `interview_feedback` varchar(50) NOT NULL DEFAULT '0',
+  `interview_ratings` tinyint(4) NOT NULL DEFAULT '0',
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`applicant_interview_id`),
+  KEY `FK_db_applicant_interview_db_applicant` (`applicant_id`),
+  CONSTRAINT `FK_db_applicant_interview_db_applicant` FOREIGN KEY (`applicant_id`) REFERENCES `db_applicant` (`applicant_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_applicant_interview`
+--
+
+LOCK TABLES `db_applicant_interview` WRITE;
+/*!40000 ALTER TABLE `db_applicant_interview` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_applicant_interview` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_assignments`
+--
+
+DROP TABLE IF EXISTS `db_assignments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_assignments` (
+  `assignment_id` int(11) NOT NULL,
+  `batch_to_modules_id` int(11) DEFAULT NULL,
+  `module_id` int(11) DEFAULT NULL,
+  `faculty_id` int(11) DEFAULT NULL,
+  `document_course_id` int(11) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `created_timestamp` timestamp NULL DEFAULT NULL,
+  `updated_timestamp` timestamp NULL DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`assignment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_assignments`
+--
+
+LOCK TABLES `db_assignments` WRITE;
+/*!40000 ALTER TABLE `db_assignments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_assignments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_batch_to_modules`
+--
+
+DROP TABLE IF EXISTS `db_batch_to_modules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_batch_to_modules` (
+  `batch_to_modules_id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch_id` int(11) NOT NULL DEFAULT '0',
+  `module_id` int(11) NOT NULL DEFAULT '0',
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `remarks` varchar(255) NOT NULL DEFAULT '0',
+  `faculty_id` int(11) NOT NULL DEFAULT '0',
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`batch_to_modules_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_batch_to_modules`
+--
+
+LOCK TABLES `db_batch_to_modules` WRITE;
+/*!40000 ALTER TABLE `db_batch_to_modules` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_batch_to_modules` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_batches`
+--
+
+DROP TABLE IF EXISTS `db_batches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_batches` (
+  `batch_id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch_end_date` datetime DEFAULT NULL,
+  `batch_name` varchar(255) DEFAULT NULL,
+  `batch_start_date` datetime DEFAULT NULL,
+  `course_id` int(11) NOT NULL,
+  `created_timestamp` datetime DEFAULT NULL,
+  `updated_timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`batch_id`),
+  KEY `FKtg1guylgmcg3aw9owiwxciiw7` (`course_id`),
+  CONSTRAINT `FKtg1guylgmcg3aw9owiwxciiw7` FOREIGN KEY (`course_id`) REFERENCES `db_courses` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_batches`
+--
+
+LOCK TABLES `db_batches` WRITE;
+/*!40000 ALTER TABLE `db_batches` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_batches` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_courses`
+--
+
+DROP TABLE IF EXISTS `db_courses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_courses` (
+  `course_id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_courses`
+--
+
+LOCK TABLES `db_courses` WRITE;
+/*!40000 ALTER TABLE `db_courses` DISABLE KEYS */;
+INSERT INTO `db_courses` VALUES (1,'DAC',1),(2,'DBDA',1),(3,'DMC',1);
+/*!40000 ALTER TABLE `db_courses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_document_courses`
+--
+
+DROP TABLE IF EXISTS `db_document_courses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_document_courses` (
+  `document_course_id` int(11) NOT NULL AUTO_INCREMENT,
+  `original_file_name` varchar(255) NOT NULL DEFAULT '',
+  `file_name` varchar(255) NOT NULL DEFAULT '',
+  `file_extension` varchar(255) NOT NULL DEFAULT '',
+  `add_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`document_course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_document_courses`
+--
+
+LOCK TABLES `db_document_courses` WRITE;
+/*!40000 ALTER TABLE `db_document_courses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_document_courses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_document_types`
+--
+
+DROP TABLE IF EXISTS `db_document_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_document_types` (
+  `document_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `document_name` varchar(255) DEFAULT NULL,
+  `status` smallint(6) NOT NULL,
+  PRIMARY KEY (`document_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_document_types`
+--
+
+LOCK TABLES `db_document_types` WRITE;
+/*!40000 ALTER TABLE `db_document_types` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_document_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_documents_applicants`
+--
+
+DROP TABLE IF EXISTS `db_documents_applicants`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_documents_applicants` (
+  `document_id` int(11) NOT NULL AUTO_INCREMENT,
+  `original_file_name` varchar(50) DEFAULT NULL,
+  `file_name` varchar(50) DEFAULT NULL,
+  `file_extension` varchar(50) DEFAULT NULL,
+  `created_timestamp` timestamp NULL DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`document_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_documents_applicants`
+--
+
+LOCK TABLES `db_documents_applicants` WRITE;
+/*!40000 ALTER TABLE `db_documents_applicants` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_documents_applicants` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_exam_papers`
+--
+
+DROP TABLE IF EXISTS `db_exam_papers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_exam_papers` (
+  `exam_papers_id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch_to_modules_id` int(11) NOT NULL DEFAULT '0',
+  `module_id` int(11) NOT NULL DEFAULT '0',
+  `faculty_id` int(11) NOT NULL DEFAULT '0',
+  `document_course_id` int(11) NOT NULL DEFAULT '0',
+  `remarks` varchar(255) NOT NULL DEFAULT '0',
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`exam_papers_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_exam_papers`
+--
+
+LOCK TABLES `db_exam_papers` WRITE;
+/*!40000 ALTER TABLE `db_exam_papers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_exam_papers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_exam_results`
+--
+
+DROP TABLE IF EXISTS `db_exam_results`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_exam_results` (
+  `exam_results_id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch_to_modules_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `document_course_id` int(11) NOT NULL,
+  `remarks` varchar(255) NOT NULL DEFAULT '',
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`exam_results_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_exam_results`
+--
+
+LOCK TABLES `db_exam_results` WRITE;
+/*!40000 ALTER TABLE `db_exam_results` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_exam_results` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_faculty`
+--
+
+DROP TABLE IF EXISTS `db_faculty`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_faculty` (
+  `faculty_id` int(11) NOT NULL AUTO_INCREMENT,
+  `Is_internal` tinyint(4) NOT NULL DEFAULT '0',
+  `applicant_id` int(11) NOT NULL,
+  `full_name` varchar(50) NOT NULL DEFAULT '',
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `password` varchar(50) NOT NULL DEFAULT '',
+  `mobile` varchar(50) NOT NULL DEFAULT '',
+  `address` varchar(255) NOT NULL DEFAULT '',
+  `skills` varchar(255) NOT NULL DEFAULT '',
+  `dob` varchar(50) NOT NULL DEFAULT '',
+  `remarks` varchar(255) NOT NULL DEFAULT '',
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`faculty_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_faculty`
+--
+
+LOCK TABLES `db_faculty` WRITE;
+/*!40000 ALTER TABLE `db_faculty` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_faculty` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_faculty_workflow`
+--
+
+DROP TABLE IF EXISTS `db_faculty_workflow`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_faculty_workflow` (
+  `faculty_workflow_id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch_to_modules_id` int(11) NOT NULL,
+  `created_timpstamp` datetime DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `hours` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `task_description` varchar(255) DEFAULT NULL,
+  `updated_timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`faculty_workflow_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_faculty_workflow`
+--
+
+LOCK TABLES `db_faculty_workflow` WRITE;
+/*!40000 ALTER TABLE `db_faculty_workflow` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_faculty_workflow` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_login`
+--
+
+DROP TABLE IF EXISTS `db_login`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_login` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_role` varchar(50) NOT NULL DEFAULT '0',
+  `name` varchar(50) NOT NULL DEFAULT '0',
+  `email` varchar(50) NOT NULL DEFAULT '0',
+  `password` varchar(50) NOT NULL DEFAULT '0',
+  `salt` varchar(50) NOT NULL DEFAULT '0',
+  `mobile` varchar(50) NOT NULL DEFAULT '0',
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_login`
+--
+
+LOCK TABLES `db_login` WRITE;
+/*!40000 ALTER TABLE `db_login` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_login` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `db_modules`
+--
+
+DROP TABLE IF EXISTS `db_modules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `db_modules` (
+  `module_id` int(11) NOT NULL AUTO_INCREMENT,
+  `module_name` varchar(50) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`module_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `db_modules`
+--
+
+LOCK TABLES `db_modules` WRITE;
+/*!40000 ALTER TABLE `db_modules` DISABLE KEYS */;
+/*!40000 ALTER TABLE `db_modules` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schema_version`
+--
+
+DROP TABLE IF EXISTS `schema_version`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schema_version` (
+  `version_rank` int(11) NOT NULL,
+  `installed_rank` int(11) NOT NULL,
+  `version` varchar(50) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `script` varchar(1000) NOT NULL,
+  `checksum` int(11) DEFAULT NULL,
+  `installed_by` varchar(100) NOT NULL,
+  `installed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `execution_time` int(11) NOT NULL,
+  `success` tinyint(1) NOT NULL,
+  PRIMARY KEY (`version`),
+  KEY `schema_version_vr_idx` (`version_rank`),
+  KEY `schema_version_ir_idx` (`installed_rank`),
+  KEY `schema_version_s_idx` (`success`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schema_version`
+--
+
+LOCK TABLES `schema_version` WRITE;
+/*!40000 ALTER TABLE `schema_version` DISABLE KEYS */;
+INSERT INTO `schema_version` VALUES (1,1,'1','Init Table','SQL','V1__Init_Table.sql',-624396862,'cdac','2019-07-29 05:05:46',608,1);
+/*!40000 ALTER TABLE `schema_version` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('admin','$2a$10$NirYymLAFn925lty.1iQNuQkJ8cRM7AX6a85BiajWd0ew41F.ck1q',1),('anuj','$2a$10$iIMmf0kjtGeB58F0br3zX.7vmJNQZHtfCimopy3.8tI3sjcuNTn0a',1),('atul','$2a$10$.sK1VO9j4l9x.fAzRG4ypuNTj5QFXUgT0CTDJzHgjDr9LwL9tjQr2',1),('madhuri','$2a$10$AzQ4iOioX4d3XGl0LOiZlehnzdrIxTQ11T5hWoTKv/cZIeGRispKm',1),('sathish','$2a$10$U7CeSAKfZzsjE4d4kSAoUOdMjho7IXLQXcdtdUXWskzTtCqk8PJTe',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'cdac_db_project3'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-07-30 21:43:14
